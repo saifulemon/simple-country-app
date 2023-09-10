@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Countries from "./components/Countries";
+import "./App.css";
+import Countries from "./components/Countries/Countries";
 
 const urlapi = "https://restcountries.com/v3.1/all";
 
