@@ -8,6 +8,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState(countries);
 
   const fetchData = async (url) => {
     setIsLoading(true);
@@ -16,6 +17,7 @@ function App() {
       const response = await fetch(url);
       const data = await response.json();
       setCountries(data);
+      setFilteredCountries(data);
       setIsLoading(false);
       setError(null);
       // console.log(countries.data);
@@ -29,13 +31,18 @@ function App() {
     fetchData(urlapi);
   }, []);
 
+  const handleRemoveCountry = (name) => {
+    const filter = filteredCountries.filter((country) => country.name.common !== name);
+    setFilteredCountries(filter);
+  }
+
   return (
     <>
       <h1>Country App</h1>
       {isLoading && <h3>Loading...</h3>}
       {error && <h3>Error: {error.message}</h3>}
       {
-        countries && <Countries countries={countries} />
+        countries && <Countries countries={filteredCountries} onremoveCountry={handleRemoveCountry} />
       }
     </>
   );

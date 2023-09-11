@@ -9,7 +9,7 @@ const Countries = (porps) => {
             porps.countries.map((country) => {
                 const countyNew = {country, id: uuidv4()}
                 return (
-                    <Country {... countyNew} key={countyNew.id} />
+                    <Country {... countyNew} key={countyNew.id} onremoveCountry={porps.onremoveCountry} />
                 )
             })
         }
